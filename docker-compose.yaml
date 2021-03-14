@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  frontend:
+    container_name: frontend
+    build:
+      context: frontend
+    ports:
+      - "8080:3000"
+    env_file: config/frontend.env
+    restart: always
+    stdin_open: true #https://github.com/docker/compose/issues/5016
+    depends_on:
+      - database
+      - server
+
+  server:
+    container_name: server
+    build:
+      context: server
+    ports:
+      - "7000:7000"
+    env_file: config/server.env
+    restart: always
+    stdin_open: true #https://github.com/docker/compose/issues/5016
+    depends_on:
+      - database
+
+  database:
+    container_name: database
+    image: mongo
+    volumes:
+      - dbdata:/data/db
+    env_file: config/database.env
+    restart: always
+
+volumes:
+  dbdata: {}
