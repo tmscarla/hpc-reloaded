@@ -22,7 +22,7 @@ cd server
 python app.py
 ```
 
-for the frontend and the backend respectively.
+for the frontend and the backend respectively. If you run each component seperately, be sure to change the endpoints properly, since in the default docker-compose configuretion they rely on enviroment variables in `config` folder.
 
 
 ### How it works
